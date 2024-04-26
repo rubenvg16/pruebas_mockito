@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -14,6 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeManagerTest {
 
@@ -56,7 +60,10 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testPayEmployeesReturnZeroWhenNoEmployeesArePresent() {
+		List<Employee> lista = new ArrayList<>();
+		when(employeeRepository.findAll()).thenReturn(lista);
 
+		Assertions.assertThat(employeeManager.payEmployees()).isEqualTo(0);
 	}
 
 	/**
